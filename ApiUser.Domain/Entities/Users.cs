@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace ApiUser.Domain.Entities
 {
-    public class User
+    public class Users
     {
+        public int Id { get; set; }
         [MaxLength(50)]
         public string FirstName { get; set; }
         [MaxLength(50)]
