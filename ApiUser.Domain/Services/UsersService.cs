@@ -19,7 +19,7 @@ namespace ApiUser.Domain.Services
             if(_userRepository.ReadByEmail(entity.Email) == null)
                 return await _userRepository.Create(entity);
 
-            return await Task.FromResult(false);
+            return false;
         }
 
         public async Task<bool> Delete(Users entity)

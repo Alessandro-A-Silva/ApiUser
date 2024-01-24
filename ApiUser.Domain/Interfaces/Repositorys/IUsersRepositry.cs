@@ -15,6 +15,6 @@ namespace ApiUser.Domain.Interfaces.Repositorys
         Task<Users> Read(Users entity);
         Task<Users> ReadById(int id);
         Task<Users> ReadByEmail(string email);
-        Task<IEnumerable<Users>> ReadAll(Users Entity);
+        Task<IEnumerable<Users>> ReadAll(Users entity);
     }
 }
