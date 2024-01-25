@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ApiUser.Application\ApiUser.Application.csproj" />
     <ProjectReference Include="..\ApiUser.Domain\ApiUser.Domain.csproj" />
   </ItemGroup>
 
