@@ -24,7 +24,12 @@ namespace ApiUser.Domain.Services
 
         public async Task<bool> Delete(Users entity)
         {
-            return await _userRepository.Delete(entity);
+            var check = await _userRepository.Read(entity);
+            if(check != null)
+            {
+                return await _userRepository.Delete(check);
+            }
+            return false;
         }
 
         public async Task<Users> Read(Users entity)
@@ -44,7 +49,17 @@ namespace ApiUser.Domain.Services
 
         public async Task<bool> Update(Users entity)
         {
-            return await _userRepository.Update(entity);
+            var check = await _userRepository.ReadById(entity.Id);
+            if( check != null)
+            {
+                check.FirstName = !string.IsNullOrEmpty(entity.FirstName) ? entity.FirstName : check.FirstName;
+                check.LastName = !string.IsNullOrEmpty(entity.LastName) ? entity.LastName : check.LastName;
+                check.Email = !string.IsNullOrEmpty(entity.Email) ? entity.Email : check.Email;
+                check.Password = !string.IsNullOrEmpty(entity.Password) ? entity.Password : check.Password;
+                return await _userRepository.Update(check);
+            }
+
+            return false;
         }
     }
 }
