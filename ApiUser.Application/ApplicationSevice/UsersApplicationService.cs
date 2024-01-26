@@ -41,6 +41,11 @@ namespace ApiUser.Application.ApplicationSevice
             return _usersMapper.ListEntityToListDto(await _usersService.ReadAll(entity));
         }
 
+        public async Task<Users?> ReadByEmail(string? email)
+        {
+            return await _usersService.ReadByEmail(email);
+        }
+
         public async Task<bool> Update(Users entity)
         {
             return await _usersService.Update(entity);

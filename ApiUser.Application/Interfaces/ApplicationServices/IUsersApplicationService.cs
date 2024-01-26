@@ -13,8 +13,8 @@ namespace ApiUser.Application.Interfaces.ApplicationServices
         Task<bool> Create(Users entity);
         Task<bool> Update(Users entity);
         Task<bool> Delete(Users entity);
+        Task<Users?> ReadByEmail(string? email);
         Task<IEnumerable<UsersDto>> ReadAll(Users entity);
         Task<UsersDto?> Read(Users entity);
-
     }
 }

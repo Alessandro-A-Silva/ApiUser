@@ -14,6 +14,7 @@ namespace ApiUser.Domain.Interfaces.Services
         Task<bool> Delete(Users entity);
         Task<Users?> Read(Users? entity);
         Task<Users?> ReadById(int id);
+        Task<Users?> ReadByEmail(string? email);
         Task<IEnumerable<Users>> ReadAll(Users Entity);
     }
 }

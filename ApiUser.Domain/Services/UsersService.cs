@@ -36,6 +36,11 @@ namespace ApiUser.Domain.Services
             return await _userRepository.ReadAll(Entity);
         }
 
+        public async Task<Users?> ReadByEmail(string? email)
+        {
+            return await _userRepository.ReadByEmail(email);
+        }
+
         public async Task<Users?> ReadById(int id)
         {
             return await _userRepository.ReadById(id);
