@@ -11,24 +11,32 @@ namespace ApiUser.Application.Mappers
 {
     public class UsersMapper : IUsersMapper
     {
-        public Users DtoToEntity(UsersDto dto)
-        {
-            return new Users()
+        public Users? DtoToEntity(UsersDto? dto)
+        {   
+            if(dto != null)
             {
-                Id = dto.Id,
-                FirstName = dto.FirstName,
-                LastName = dto.LastName,
-            };
+                return new Users()
+                {
+                    Id = dto.Id,
+                    FirstName = dto.FirstName,
+                    LastName = dto.LastName,
+                };
+            }
+            return null;
         }
 
-        public UsersDto EntityToDto(Users entity)
-        {
-            return new UsersDto()
+        public UsersDto? EntityToDto(Users? entity)
+        {   
+            if(entity != null)
             {
-                Id = entity.Id,
-                FirstName = entity.FirstName,
-                LastName = entity.LastName
-            };
+                return new UsersDto()
+                {
+                    Id = entity.Id,
+                    FirstName = entity.FirstName,
+                    LastName = entity.LastName
+                };
+            }
+            return null;
         }
 
         public IEnumerable<UsersDto> ListEntityToListDto(IEnumerable<Users> entities)
@@ -38,6 +46,7 @@ namespace ApiUser.Application.Mappers
                 Id = x.Id,
                 FirstName = x.FirstName,
                 LastName = x.LastName,
+                Email = x.Email
             });
         }
     }

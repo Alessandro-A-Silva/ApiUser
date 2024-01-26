@@ -10,8 +10,8 @@ namespace ApiUser.Application.Interfaces.Mappers
 {
     public interface IUsersMapper
     {
-        Users DtoToEntity(UsersDto dto);
-        UsersDto EntityToDto(Users entity);
+        Users? DtoToEntity(UsersDto? dto);
+        UsersDto? EntityToDto(Users? entity);
         IEnumerable<UsersDto> ListEntityToListDto(IEnumerable<Users> entities);
     }
 }

@@ -2,11 +2,6 @@
 using ApiUser.Domain.Interfaces.Repositorys;
 using ApiUser.Domain.Query;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiUser.Infrastructure.Data.Repositorys
 {
@@ -21,12 +16,12 @@ namespace ApiUser.Infrastructure.Data.Repositorys
             {
                 _context.users.Add(entity);
                 await _context.SaveChangesAsync();
-                return true;
             }
             catch
             {
                 return false;
             }
+            return true;
         }
 
         public async Task<bool> Delete(Users entity)
@@ -35,22 +30,26 @@ namespace ApiUser.Infrastructure.Data.Repositorys
             {
                 _context.users.Remove(entity);
                 await _context.SaveChangesAsync();
-                return true;
             }
             catch
             {
                 return false;
             }
+            return true;
         }
 
-        public async Task<Users> Read(Users entity)
-        {
-            return await _context.users.FilterById(entity.Id)
-                                       .FilterByFirstName(entity.FirstName)
-                                       .FilterByLastName(entity.LastName)
-                                       .FilterByEmail(entity.Email)
-                                       .FilterByPassword(entity.Password)
-                                       .FirstOrDefaultAsync();
+        public async Task<Users?> Read(Users? entity)
+        {   
+            if(entity != null)
+            {
+                return await _context.users.FilterById(entity.Id)
+                                           .FilterByFirstName(entity.FirstName)
+                                           .FilterByLastName(entity.LastName)
+                                           .FilterByEmail(entity.Email)
+                                           .FilterByPassword(entity.Password)
+                                           .FirstOrDefaultAsync();
+            }
+            return null;
         }
 
         public async Task<IEnumerable<Users>> ReadAll(Users entity)
@@ -63,14 +62,14 @@ namespace ApiUser.Infrastructure.Data.Repositorys
                                        .ToListAsync();
         }
 
-        public async Task<Users> ReadByEmail(string email)
+        public async Task<Users?> ReadByEmail(string? email)
         {
-            return await _context.users.FilterByEmail(email).FirstOrDefaultAsync();
+            return await _context.users.FirstOrDefaultAsync(x => x.Email == email);
         }
 
-        public async Task<Users> ReadById(int id)
+        public async Task<Users?> ReadById(int id)
         {
-            return await _context.users.FilterById(id).FirstOrDefaultAsync();
+            return await _context.users.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<bool> Update(Users entity)
@@ -79,12 +78,12 @@ namespace ApiUser.Infrastructure.Data.Repositorys
             {
                 _context.Entry(entity).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
-                return true;
             }
             catch
             {
                 return false;
             }
+            return true;
         }
     }
 }

@@ -12,8 +12,8 @@ namespace ApiUser.Domain.Interfaces.Services
         Task<bool> Create(Users entity);
         Task<bool> Update(Users entity);
         Task<bool> Delete(Users entity);
-        Task<Users> Read(Users entity);
-        Task<Users> ReadById(int id);
+        Task<Users?> Read(Users? entity);
+        Task<Users?> ReadById(int id);
         Task<IEnumerable<Users>> ReadAll(Users Entity);
     }
 }

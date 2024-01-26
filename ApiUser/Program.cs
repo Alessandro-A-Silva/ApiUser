@@ -18,12 +18,12 @@ builder.Services.AddSwaggerGen(options => options.SwaggerDoc("v1", new OpenApiIn
 {
     Version = "v1",
     Title = "User API by Alessandro Silva.",
-    Description = "An .NET 6 Web API for managing user."
+    Description = "An .NET 7 Web API for managing user."
 }));
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("DB"));
 
-builder.Services.AddCors(c => c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+builder.Services.AddCors(x => x.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
@@ -37,6 +37,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
 app.UseHttpsRedirection();
 

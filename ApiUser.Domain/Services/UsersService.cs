@@ -1,11 +1,6 @@
 ﻿using ApiUser.Domain.Entities;
 using ApiUser.Domain.Interfaces.Repositorys;
 using ApiUser.Domain.Interfaces.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiUser.Domain.Services
 {
@@ -16,7 +11,7 @@ namespace ApiUser.Domain.Services
 
         public  async Task<bool> Create(Users entity)
         {
-            if(_userRepository.ReadByEmail(entity.Email) == null)
+            if(await _userRepository.ReadByEmail(entity.Email) == null)
                 return await _userRepository.Create(entity);
 
             return false;
@@ -26,13 +21,12 @@ namespace ApiUser.Domain.Services
         {
             var check = await _userRepository.Read(entity);
             if(check != null)
-            {
                 return await _userRepository.Delete(check);
-            }
+           
             return false;
         }
 
-        public async Task<Users> Read(Users entity)
+        public async Task<Users?> Read(Users? entity)
         {
             return await _userRepository.Read(entity);
         }
@@ -42,7 +36,7 @@ namespace ApiUser.Domain.Services
             return await _userRepository.ReadAll(Entity);
         }
 
-        public async Task<Users> ReadById(int id)
+        public async Task<Users?> ReadById(int id)
         {
             return await _userRepository.ReadById(id);
         }

@@ -31,7 +31,7 @@ namespace ApiUser.Application.ApplicationSevice
             return await _usersService.Delete(entity);
         }
 
-        public async Task<UsersDto> Read(Users entity)
+        public async Task<UsersDto?> Read(Users? entity)
         {
             return _usersMapper.EntityToDto(await _usersService.Read(entity));
         }

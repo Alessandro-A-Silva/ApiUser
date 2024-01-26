@@ -14,7 +14,7 @@ namespace ApiUser.Application.Interfaces.ApplicationServices
         Task<bool> Update(Users entity);
         Task<bool> Delete(Users entity);
         Task<IEnumerable<UsersDto>> ReadAll(Users entity);
-        Task<UsersDto> Read(Users entity);
+        Task<UsersDto?> Read(Users entity);
 
     }
 }

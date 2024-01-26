@@ -12,9 +12,9 @@ namespace ApiUser.Domain.Interfaces.Repositorys
         Task<bool> Create(Users entity);
         Task<bool> Update(Users entity);
         Task<bool> Delete(Users entity);
-        Task<Users> Read(Users entity);
-        Task<Users> ReadById(int id);
-        Task<Users> ReadByEmail(string email);
+        Task<Users?> Read(Users? entity);
+        Task<Users?> ReadById(int id);
+        Task<Users?> ReadByEmail(string? email);
         Task<IEnumerable<Users>> ReadAll(Users entity);
     }
 }
