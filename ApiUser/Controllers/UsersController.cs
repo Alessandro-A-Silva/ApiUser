@@ -1,7 +1,9 @@
-﻿using ApiUser.Api.Model;
+﻿using ApiUser.Api.Interfaces.Services;
+using ApiUser.Api.Model;
 using ApiUser.Application.Dtos;
 using ApiUser.Application.Interfaces.ApplicationServices;
 using ApiUser.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -13,9 +15,11 @@ namespace ApiUser.Api.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUsersApplicationService _usersApplicationService;
-        public UsersController(IUsersApplicationService usersApplicationService)
+        private readonly ITokenService _tokenService;
+        public UsersController(IUsersApplicationService usersApplicationService,ITokenService tokenService)
         {
             _usersApplicationService = usersApplicationService;
+            _tokenService = tokenService;
         }
 
         [HttpPost]
@@ -48,16 +52,11 @@ namespace ApiUser.Api.Controllers
                 var user = await _usersApplicationService.ReadByEmail(request.Email);
 
                 if (user != null)
-                {
+                {   
                     if (request.Password == user.Password)
                     {
-                        return StatusCode(StatusCodes.Status200OK, new UsersDto() 
-                        { 
-                            Id = user.Id, 
-                            FirstName = user.FirstName,
-                            LastName = user.LastName,
-                            Email = user.Email
-                        });
+                        string token = await _tokenService.GenerateToken(user);
+                        return StatusCode(StatusCodes.Status200OK,new ObjectResult(new {FirstName = user.FirstName, LastName = user.LastName, Token = token}));
                     }
                     return StatusCode(StatusCodes.Status400BadRequest, "Incorrect password.");
                 }
@@ -71,6 +70,7 @@ namespace ApiUser.Api.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [SwaggerOperation(Summary = "Read all users.")]
         [SwaggerResponse(StatusCodes.Status200OK)]
@@ -87,6 +87,7 @@ namespace ApiUser.Api.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete]
         [SwaggerOperation(Summary = "Delete a user.")]
         [SwaggerResponse(StatusCodes.Status200OK)]
@@ -106,6 +107,7 @@ namespace ApiUser.Api.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut]
         [SwaggerOperation(Summary = "Update a user.")]
         [SwaggerResponse(StatusCodes.Status200OK)]
