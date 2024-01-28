@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Domain", "3-Domain", "{2B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Infrastructure", "4-Infrastructure", "{E7C36590-A405-47B8-9251-A48A356F92DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiUser", "ApiUser\ApiUser.csproj", "{061AC057-3103-403D-BA29-7170FBE60A97}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiUser.Api", "ApiUser\ApiUser.Api.csproj", "{061AC057-3103-403D-BA29-7170FBE60A97}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiUser.Application", "ApiUser.Application\ApiUser.Application.csproj", "{C5009BA6-89D1-4FAB-B677-A4713603891E}"
 EndProject
