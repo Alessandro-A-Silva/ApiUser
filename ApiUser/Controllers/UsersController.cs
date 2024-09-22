@@ -123,7 +123,7 @@ namespace ApiUser.Api.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error when trying to register." + ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error when trying to update." + ex.Message);
             }
         }
     }
